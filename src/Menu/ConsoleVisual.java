@@ -91,4 +91,14 @@ public final class ConsoleVisual {
 		texto("  [2] Equipamento");
 		texto("  [3] Sair");
 	}
+	
+	public static void menuStatus() {
+		titulo("ASSISTÊNCIA TÉCNICA", "Central de atendimento | Alterar Status da OS");
+		texto("Status");
+		texto("  [1] ABERTA");
+		texto("  [2] EM_MANUTENCAO");
+		texto("  [3] FINALIZANDO");
+		texto("  [4] PRONTO_PARA_RETIRADA");
+		texto("  [5] Sair");
+	}
 }

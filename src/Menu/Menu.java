@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import Clientes.Clientes;
 import OrdemServico.OrdemServico;
+import OrdemServico.Status;
 
 public class Menu {
 	Scanner sc = new Scanner(System.in);
@@ -86,7 +87,7 @@ public class Menu {
 				case 2:
 					servico = "Manutenção Preventiva";
 					selecionada.setServico(servico);
-					selecionada.setStatus("Aberta");
+					selecionada.setStatus(Status.ABERTA);
 					ConsoleVisual.sucesso("Ordem de serviço aberta com sucesso.");
 					break;
 				case 1:
@@ -95,7 +96,7 @@ public class Menu {
 					ConsoleVisual.pedir("Qual o defeito ?");
 					String defeito = sc.nextLine();
 					selecionada.setDefeito(defeito);
-					selecionada.setStatus("Aberta");
+					selecionada.setStatus(Status.ABERTA);
 					ConsoleVisual.sucesso("Ordem de serviço aberta com sucesso.");
 					break;
 				default:
@@ -109,7 +110,7 @@ public class Menu {
 				selecionada.setServico(servico);
 				String defeito = sc.nextLine();
 				selecionada.setDefeito(defeito);
-				selecionada.setStatus("Aberta");
+				selecionada.setStatus(Status.ABERTA);
 				ConsoleVisual.sucesso("Ordem de serviço aberta com sucesso.");
 				break;
 			}
@@ -164,6 +165,7 @@ public class Menu {
 	}
 
 	public void AlterarStatus() {
+
 		ConsoleVisual.titulo("ALTERAR STATUS DA OS", "ASSISTÊNCIA TÉCNICA | Atendimento");
 		if (listaOrdens.isEmpty()) {
 			ConsoleVisual.aviso("Cadastre um equipamento primeiro.");
@@ -178,7 +180,7 @@ public class Menu {
 		} else {
 
 			boolean cpfExist = false;
-			ConsoleVisual.texto("Digite o seu cpf: ");
+			ConsoleVisual.pedir("Digite o cpf: ");
 			String cpf = sc.nextLine();
 			for (OrdemServico x : listaOrdens) {
 				if (cpf.equals(x.getCliente().getCpf())) {
@@ -203,13 +205,39 @@ public class Menu {
 
 				OrdemServico selecionada = listaOrdens.get(opcao - 1);
 
-				if (selecionada.getStatus() == null) {
+				if (selecionada.getStatus()==Status.NAO_ABERTA) {
 					ConsoleVisual.aviso("Essa ordem de serviço ainda não foi aberta.");
 					return;
 				}
-				ConsoleVisual.pedir("Novo status da OS");
-				String status = sc.nextLine();
-				selecionada.setStatus(status);
+				ConsoleVisual.menuStatus();
+				int escolha = sc.nextInt();
+				sc.nextLine();
+
+				switch (escolha) {
+
+				case 1:
+					selecionada.setStatus(Status.ABERTA);
+					break;
+
+				case 2:
+					selecionada.setStatus(Status.EM_MANUTENCAO);
+					break;
+
+				case 3:
+					selecionada.setStatus(Status.FINALIZANDO);
+					break;
+
+				case 4:
+					selecionada.setStatus(Status.PRONTO_PARA_RETIRADA);
+					break;
+					
+				case 5:
+					System.out.println("Saindo...");
+					break;
+
+				default:
+					System.out.println("Digite uma opção válida!!!");
+				}
 				ConsoleVisual.sucesso("Status atualizado com sucesso.");
 			}
 		}
@@ -234,7 +262,7 @@ public class Menu {
 			ConsoleVisual.menuDelete();
 			int escolha = sc.nextInt();
 			sc.nextLine();
-			
+
 			ArrayList<OrdemServico> ordensCliente = new ArrayList<>(); // lista local
 
 			for (OrdemServico os : listaOrdens) { // compara o cpf digitado com o cpf cadastrado, caso seja igual irá
@@ -246,7 +274,7 @@ public class Menu {
 
 			switch (escolha) {
 			case 1:
-				
+
 				listaOrdens.removeAll(ordensCliente);
 				listaClientes.remove(clienteEncontrado);
 				break;
@@ -277,7 +305,7 @@ public class Menu {
 				ConsoleVisual.sucesso("Cadastro excluído");
 				break;
 			}
-			
+
 		}
 	}
 
@@ -289,8 +317,7 @@ public class Menu {
 		ConsoleVisual.campo("Serviço pedido:", equipamento.getServico());
 		ConsoleVisual.campo("Defeito:",
 				equipamento.getDefeito() == null ? "Nenhum defeito informado" : equipamento.getDefeito());
-		ConsoleVisual.campo("Status",
-				equipamento.getStatus() == null ? "OS ainda não aberta" : equipamento.getStatus());
+		ConsoleVisual.campo("Status", equipamento.getStatus().toString());
 		ConsoleVisual.linha();
 	}
 

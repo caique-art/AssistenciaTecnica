@@ -9,11 +9,12 @@ public class OrdemServico {
 	private String modelo;
 	private String servico;
 	private String defeito;
-	private String status;
+	private Status status;
 	private int senha;
 	private Clientes Cliente;
 
 	public OrdemServico() {
+		status=Status.NAO_ABERTA;
 	}
 
 	public String getDefeito() {
@@ -48,11 +49,11 @@ public class OrdemServico {
 		this.produto = produto;
 	}
 
-	public String getStatus() {
+	public Status getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(Status status) {
 		this.status = status;
 	}
 
