@@ -6,14 +6,15 @@ import Clientes.Clientes;
 
 public class CadastroClientes {
 	ArrayList<Clientes> listaClientes;
-
-	public CadastroClientes(ArrayList<Clientes> listaClientes) {
+	private Scanner sc;
+	public CadastroClientes(ArrayList<Clientes> listaClientes, Scanner sc) {
 		this.listaClientes = listaClientes;
+		this.sc=sc;
 	}
 
 	public void CadastrarClientes() {
 
-		Scanner sc = new Scanner(System.in);
+		
 
 			Clientes cliente = new Clientes();
 			ConsoleVisual.titulo("CADASTRAR CLIENTE", "ASSISTÊNCIA TÉCNICA | Atendimento");

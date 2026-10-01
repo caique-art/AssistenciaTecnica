@@ -18,8 +18,8 @@ public class Main {
 		ArrayList<OrdemServico> listaOrdens = new ArrayList<>();
 		ArrayList<Clientes> listaClientes = new ArrayList<>();
 		CadastrarEquipamento cadastrarEquipamento= new CadastrarEquipamento(listaOrdens, listaClientes);
-		CadastroClientes cadastroClientes= new CadastroClientes(listaClientes);
-		Menu menu = new Menu(listaOrdens, listaClientes);
+		CadastroClientes cadastroClientes= new CadastroClientes(listaClientes, sc);
+		Menu menu = new Menu(listaOrdens, listaClientes, sc);
 		int escolha;
 
 		do {
@@ -50,13 +50,14 @@ public class Main {
 				
 			case 6:
 				menu.Delete();
+				break;
 
 			case 0:
 				ConsoleVisual.sucesso("Atendimento encerrado. Até a próxima!");
 				break;
 
 			default:
-				ConsoleVisual.aviso("Opção inválida. Escolha um número de 0 a 5.");
+				ConsoleVisual.aviso("Opção inválida. Escolha um número de 0 a 6.");
 				break;
 			}
 		} while (escolha != 0);

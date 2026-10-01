@@ -7,7 +7,7 @@ import Clientes.Clientes;
 import OrdemServico.OrdemServico;
 
 public class CadastrarEquipamento {
-	Scanner sc = new Scanner(System.in);
+	private Scanner sc;
 	CadastroClientes cadastroClientes;
 	ArrayList<OrdemServico> listaOrdens;
 	ArrayList<Clientes> listaClientes;
@@ -18,7 +18,7 @@ public class CadastrarEquipamento {
 	}
 
 	public void CadastroEquipamento() {
-		Clientes clienteEncontradado = null;
+		Clientes clienteEncontrado = null;
 		boolean cpfExist = false;
 
 		ConsoleVisual.titulo("CADASTRAR EQUIPAMENTO", "ASSISTÊNCIA TÉCNICA | Atendimento");
@@ -27,7 +27,7 @@ public class CadastrarEquipamento {
 		for (Clientes x : listaClientes) {
 			if (cpf.equals(x.getCpf())) {
 				cpfExist = true;
-				clienteEncontradado = x;
+				clienteEncontrado = x;
 			}
 		}
 		if (!cpfExist) {
@@ -39,7 +39,6 @@ public class CadastrarEquipamento {
 			String produto;
 
 			for (int i = 0; i < quantidade; i++) {
-				OrdemServico os2 = new OrdemServico();
 				ConsoleVisual.secao("EQUIPAMENTO " + (i + 1) + " DE " + quantidade);
 				ConsoleVisual.pedir("Produto");
 				produto = sc.nextLine();
@@ -47,11 +46,12 @@ public class CadastrarEquipamento {
 				String marca = sc.nextLine();
 				ConsoleVisual.pedir("Modelo");
 				String modelo = sc.nextLine();
+				OrdemServico os2 = new OrdemServico(produto, marca, modelo, clienteEncontrado);
 
 				os2.setProduto(produto);
 				os2.setMarca(marca);
 				os2.setModelo(modelo);
-				os2.setCliente(clienteEncontradado);
+				os2.setCliente(clienteEncontrado);
 				listaOrdens.add(os2);
 				ConsoleVisual.sucesso("Equipamento cadastrado com sucesso.");
 			}

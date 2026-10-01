@@ -2,19 +2,17 @@ package OrdemServico;
 
 import Clientes.Clientes;
 
-public class OrdemServico {
+public class OrdemServico extends Produto {
 
-	private String produto;
-	private String marca;
-	private String modelo;
 	private String servico;
 	private String defeito;
 	private Status status;
-	private int senha;
 	private Clientes Cliente;
 
-	public OrdemServico() {
-		status=Status.NAO_ABERTA;
+	public OrdemServico(String produto, String marca, String modelo, Clientes cliente) {
+	    super(produto, marca, modelo);
+	    this.Cliente = cliente;
+	    status = Status.NAO_ABERTA;
 	}
 
 	public String getDefeito() {
@@ -25,44 +23,12 @@ public class OrdemServico {
 		this.defeito = defeito;
 	}
 
-	public String getMarca() {
-		return marca;
-	}
-
-	public void setMarca(String marca) {
-		this.marca = marca;
-	}
-
-	public String getModelo() {
-		return modelo;
-	}
-
-	public void setModelo(String modelo) {
-		this.modelo = modelo;
-	}
-
-	public String getProduto() {
-		return produto;
-	}
-
-	public void setProduto(String produto) {
-		this.produto = produto;
-	}
-
 	public Status getStatus() {
 		return status;
 	}
 
 	public void setStatus(Status status) {
 		this.status = status;
-	}
-
-	public int getSenha() {
-		return senha;
-	}
-
-	public void setSenha(int senha) {
-		this.senha = senha;
 	}
 	
 	public String getServico() {

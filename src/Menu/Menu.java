@@ -8,31 +8,25 @@ import OrdemServico.OrdemServico;
 import OrdemServico.Status;
 
 public class Menu {
-	Scanner sc = new Scanner(System.in);
+	private Scanner sc;
 	OrdemServico os;
 	Clientes clienteEncontradado = null;
 	ArrayList<OrdemServico> listaOrdens;
 	ArrayList<Clientes> listaClientes;
 	CadastroClientes cadastroClientes;
 
-	public Menu(ArrayList<OrdemServico> listaOrdens, ArrayList<Clientes> listaClientes) {
+	public Menu(ArrayList<OrdemServico> listaOrdens, ArrayList<Clientes> listaClientes, Scanner sc) {
 		this.listaOrdens = listaOrdens;
 		this.listaClientes = listaClientes;
+		this.sc = sc;
 	}
 
 	public void AbrirOS() {
 		ConsoleVisual.titulo("ABRIR ORDEM DE SERVIÇO", "ASSISTÊNCIA TÉCNICA | Atendimento");
 		ConsoleVisual.texto("Digite o seu cpf: ");
 		String cpf = sc.nextLine();
-		Clientes clienteEncontrado = null;
 
-		for (Clientes x : listaClientes) {
-
-			if (cpf.equals(x.getCpf())) {
-				clienteEncontrado = x;
-			}
-
-		}
+		Clientes clienteEncontrado = buscarClientePorCpf(cpf);
 		if (clienteEncontrado == null) {
 			ConsoleVisual.aviso("CPF inválido!!!!");
 		} else {
@@ -122,24 +116,15 @@ public class Menu {
 		ConsoleVisual.titulo("CONSULTAR ORDENS DE SERVIÇO", "ASSISTÊNCIA TÉCNICA | Atendimento");
 		ConsoleVisual.pedir("Digite o seu cpf: ");
 		String cpf = sc.nextLine();
-		Clientes clienteEncontrado = null;
+		Clientes clienteEncontrado=buscarClientePorCpf(cpf);
+		
 
-		for (Clientes x : listaClientes) { // percorre toda a lista atrás de um cpf válido da lista
-
-			if (cpf.equals(x.getCpf())) {
-				clienteEncontrado = x;
-			}
-
-		}
 		if (listaOrdens.isEmpty()) {
 			ConsoleVisual.aviso("Cadastre um equipamento primeiro.");
 			return;
 		}
 		for (int i = 0; i < listaOrdens.size(); i++) {
 			OrdemServico selecionada = listaOrdens.get(i);
-
-			System.out.println("CPF pesquisado: " + cpf);
-			System.out.println("CPF da OS: " + selecionada.getCliente().getCpf());
 
 			if (cpf.equals(selecionada.getCliente().getCpf())) {
 				exibirEquipamento(i, selecionada);
@@ -172,22 +157,19 @@ public class Menu {
 			return;
 		}
 		ConsoleVisual.pedir("Senha de acesso");
-		os.setSenha(sc.nextInt());
+		int senha = sc.nextInt();
 		sc.nextLine();
-		if (os.getSenha() != 123) {
+		if (senha != 123) {
 			ConsoleVisual.aviso("Senha errada. Somente pessoas autorizadas podem fazer isso.");
 
 		} else {
 
-			boolean cpfExist = false;
+			System.out.println(listaClientes);
 			ConsoleVisual.pedir("Digite o cpf: ");
 			String cpf = sc.nextLine();
-			for (OrdemServico x : listaOrdens) {
-				if (cpf.equals(x.getCliente().getCpf())) {
-					cpfExist = true;
-				}
-			}
-			if (!cpfExist) {
+			Clientes clienteEncontrado = buscarClientePorCpf(cpf);
+
+			if (clienteEncontrado == null) {
 				ConsoleVisual.aviso("CPF inválido!!!!");
 			} else {
 
@@ -205,7 +187,7 @@ public class Menu {
 
 				OrdemServico selecionada = listaOrdens.get(opcao - 1);
 
-				if (selecionada.getStatus()==Status.NAO_ABERTA) {
+				if (selecionada.getStatus() == Status.NAO_ABERTA) {
 					ConsoleVisual.aviso("Essa ordem de serviço ainda não foi aberta.");
 					return;
 				}
@@ -230,7 +212,7 @@ public class Menu {
 				case 4:
 					selecionada.setStatus(Status.PRONTO_PARA_RETIRADA);
 					break;
-					
+
 				case 5:
 					System.out.println("Saindo...");
 					break;
@@ -247,14 +229,8 @@ public class Menu {
 		ConsoleVisual.titulo("EXCLUIR CADASTRO OU EQUIPAMENTO", "ASSISTÊNCIA TÉCNICA | Atendimento");
 		ConsoleVisual.pedir("Digite o seu cpf: ");
 		String cpf = sc.nextLine();
-		Clientes clienteEncontrado = null;
+		Clientes clienteEncontrado=buscarClientePorCpf(cpf);
 
-		for (Clientes x : listaClientes) {
-
-			if (cpf.equals(x.getCpf())) {
-				clienteEncontrado = x;
-			}
-		}
 		if (clienteEncontrado == null) {
 			ConsoleVisual.aviso("CPF inválido!!!!");
 
@@ -319,6 +295,15 @@ public class Menu {
 				equipamento.getDefeito() == null ? "Nenhum defeito informado" : equipamento.getDefeito());
 		ConsoleVisual.campo("Status", equipamento.getStatus().toString());
 		ConsoleVisual.linha();
+	}
+
+	private Clientes buscarClientePorCpf(String cpf) {
+		for (Clientes x : listaClientes) {
+			if (cpf.equals(x.getCpf())) {
+				return x;
+			}
+		}
+		return null;
 	}
 
 }
