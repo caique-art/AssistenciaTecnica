@@ -13,7 +13,7 @@ public class Menu {
 	// OrdemServico selecionada;
 	ArrayList<OrdemServico> lista = new ArrayList<>();
 
-	public void cadastrarClientes() {
+	public void CadastrarClientes() {
 		System.out.print("Digite seu nome: ");
 		String nome = sc.nextLine();
 		System.out.print("Digite seu CPF: ");
@@ -26,7 +26,7 @@ public class Menu {
 		cliente.setTelefone(telefone);
 	}
 
-	public void cadastrarEquipamento() {
+	public void CadastrarEquipamento() {
 		if (cliente.getCpf() == null || cliente.getNome() == null) {
 			System.out.println("Complete o login primeiro");
 		} else {
@@ -52,7 +52,7 @@ public class Menu {
 		}
 	}
 
-	public void abrirOS() {
+	public void AbrirOS() {
 		if (lista.isEmpty()) {
 			System.out.println("Cadastre um equipamento primeiro.");
 			return;
@@ -76,7 +76,7 @@ public class Menu {
 		System.out.println("Ordem de serviço aberta com sucesso.");
 	}
 
-	public void consultarOS() {
+	public void ConsultarOS() {
 		if (lista.isEmpty()) {
 			System.out.println("Cadastre um equipamento primeiro.");
 			return;
@@ -102,7 +102,7 @@ public class Menu {
 		}
 	}
 
-	public void alterarStatus() {
+	public void AlterarStatus() {
 		if (lista.isEmpty()) {
 		    System.out.println("Cadastre um equipamento primeiro.");
 		    return;

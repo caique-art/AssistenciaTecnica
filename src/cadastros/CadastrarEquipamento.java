@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import OrdemServico.OrdemServico;
+import OrdemServico.Produto;
 import login.Clientes;
 
 public class CadastrarEquipamento {
@@ -12,19 +13,20 @@ public class CadastrarEquipamento {
 	CadastroClientes cadastroClientes;
 	ArrayList<OrdemServico> listaOrdens;
 	ArrayList<Clientes> listaClientes;
+	
 
-	public CadastrarEquipamento(ArrayList<OrdemServico> listaOrdens, ArrayList<Clientes> listaClientes) {
+	public CadastrarEquipamento(ArrayList<OrdemServico> listaOrdens, ArrayList<Clientes> listaClientes, Scanner sc) {
 		this.listaOrdens = listaOrdens;
 		this.listaClientes = listaClientes;
-        this.sc = new Scanner(System.in);
+		this.sc=sc;
 	}
 
-	public void cadastrarEquipamento() {
+	public void CadastroEquipamento() {
 		Clientes clienteEncontrado = null;
 		boolean cpfExist = false;
 
 		ConsoleVisual.titulo("CADASTRAR EQUIPAMENTO", "ASSISTÊNCIA TÉCNICA | Atendimento");
-		System.out.println("Digite o seu cpf: ");
+		System.out.println("Digite o cpf do cliente: ");
 		String cpf = sc.next();
 		for (Clientes x : listaClientes) {
 			if (cpf.equals(x.getCpf())) {
@@ -59,4 +61,5 @@ public class CadastrarEquipamento {
 			}
 		}
 	}
+
 }

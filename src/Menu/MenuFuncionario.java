@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import OrdemServico.OrdemServico;
+import OrdemServico.Produto;
 import OrdemServico.Status;
+import cadastros.CadastrarEquipamento;
 import cadastros.CadastroClientes;
 import cadastros.CadastroFuncionario;
 import login.Clientes;
@@ -18,9 +20,11 @@ public class MenuFuncionario {
 	private ArrayList<OrdemServico> listaOrdens;
 	private ArrayList<Clientes> listaClientes;
 	private ArrayList<Funcionario> listaFuncionario;
+	
 
 	private CadastroClientes cadastroClientes;
 	private CadastroFuncionario cadastroFuncionario;
+	private CadastrarEquipamento cadastroEquipamento;
 
 	public MenuFuncionario(ArrayList<OrdemServico> listaOrdens,
 			ArrayList<Clientes> listaClientes,
@@ -36,6 +40,7 @@ public class MenuFuncionario {
 
 		this.cadastroClientes = new CadastroClientes(listaClientes, sc);
 		this.cadastroFuncionario = new CadastroFuncionario(listaFuncionario, sc);
+		this.cadastroEquipamento = new CadastrarEquipamento(listaOrdens, listaClientes, sc);
 	}
 
 	public void menu() {
@@ -47,13 +52,14 @@ public class MenuFuncionario {
 			ConsoleVisual.titulo("MENU FUNCIONÁRIO",
 					"ASSISTÊNCIA TÉCNICA | Funcionário: " + funcionario.getNome());
 
-			System.out.println("1 - Cadastrar cliente");
-			System.out.println("2 - Cadastrar funcionário");
-			System.out.println("3 - Abrir ordem de serviço");
-			System.out.println("4 - Consultar ordem de serviço");
-			System.out.println("5 - Alterar status da OS");
-			System.out.println("6 - Excluir cadastro/equipamento");
-			System.out.println("0 - Sair");
+			ConsoleVisual.texto("1 - Cadastrar cliente");
+			ConsoleVisual.texto("2 - Cadastrar funcionário");
+			ConsoleVisual.texto("3 - Cadastrar equipamento");
+			ConsoleVisual.texto("4 - Abrir ordem de serviço");
+			ConsoleVisual.texto("5 - Consultar ordem de serviço");
+			ConsoleVisual.texto("6 - Alterar status da OS");
+			ConsoleVisual.texto("7 - Excluir cadastro/equipamento");
+			ConsoleVisual.texto("0 - Sair");
 
 			ConsoleVisual.pedir("Escolha uma opção");
 			escolha = sc.nextInt();
@@ -62,27 +68,30 @@ public class MenuFuncionario {
 			switch (escolha) {
 
 			case 1:
-				cadastroClientes.cadastrarClientes();
+				cadastroClientes.CadastrarClientes();
 				break;
 
 			case 2:
-				cadastroFuncionario.cadastrarFuncionario();
+				cadastroFuncionario.CadastrarFuncionario();
 				break;
 
 			case 3:
-				abrirOS();
+				cadastroEquipamento.CadastroEquipamento();
 				break;
-
 			case 4:
-				consultarOS();
+				AbrirOS();
 				break;
 
 			case 5:
-				alterarStatus();
+				ConsultarOS();
 				break;
 
 			case 6:
-				deletar();
+				AlterarStatus();
+				break;
+
+			case 7:
+				Delete();
 				break;
 
 			case 0:
@@ -96,7 +105,7 @@ public class MenuFuncionario {
 		} while (escolha != 0);
 	}
 
-	public void abrirOS() {
+	public void AbrirOS() {
 
 		ConsoleVisual.titulo("ABRIR ORDEM DE SERVIÇO",
 				"ASSISTÊNCIA TÉCNICA | Atendimento");
@@ -216,7 +225,7 @@ public class MenuFuncionario {
 		}
 	}
 
-	public void consultarOS() {
+	public void ConsultarOS() {
 
 		ConsoleVisual.titulo("CONSULTAR ORDENS DE SERVIÇO",
 				"ASSISTÊNCIA TÉCNICA | Atendimento");
@@ -260,7 +269,7 @@ public class MenuFuncionario {
 		}
 	}
 
-	public void alterarStatus() {
+	public void AlterarStatus() {
 
 		ConsoleVisual.titulo("ALTERAR STATUS DA OS",
 				"ASSISTÊNCIA TÉCNICA | Atendimento");
@@ -348,7 +357,7 @@ public class MenuFuncionario {
 		ConsoleVisual.sucesso("Status atualizado com sucesso.");
 	}
 
-	public void deletar() {
+	public void Delete() {
 
 		ConsoleVisual.titulo("EXCLUIR CADASTRO OU EQUIPAMENTO",
 				"ASSISTÊNCIA TÉCNICA | Atendimento");

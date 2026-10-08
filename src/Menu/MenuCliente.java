@@ -32,11 +32,11 @@ public class MenuCliente {
 			ConsoleVisual.titulo("MENU CLIENTE",
 					"ASSISTÊNCIA TÉCNICA | " + cliente.getNome());
 
-			System.out.println("1 - Consultar equipamentos");
-			System.out.println("2 - Consultar ordens de serviço");
-			System.out.println("3 - Abrir ordem de serviço");
-			System.out.println("4 - Excluir cadastro");
-			System.out.println("0 - Sair");
+			ConsoleVisual.texto("1 - Consultar equipamentos");
+			ConsoleVisual.texto("2 - Consultar ordens de serviço");
+			ConsoleVisual.texto("3 - Abrir ordem de serviço");
+			ConsoleVisual.texto("4 - Excluir cadastro");
+			ConsoleVisual.texto("0 - Sair");
 
 			ConsoleVisual.pedir("Escolha uma opção");
 			escolha = sc.nextInt();
@@ -45,19 +45,19 @@ public class MenuCliente {
 			switch (escolha) {
 
 			case 1:
-				consultarEquipamentos();
+				ConsultarEquipamentos();
 				break;
 
 			case 2:
-				consultarOS();
+				ConsultarOS();
 				break;
 
 			case 3:
-				abrirOS();
+				AbrirOS();
 				break;
 
 			case 4:
-				deletar();
+				Delete();
 				break;
 
 			case 0:
@@ -71,7 +71,7 @@ public class MenuCliente {
 		} while (escolha != 0);
 	}
 
-	public void consultarEquipamentos() {
+	public void ConsultarEquipamentos() {
 
 		ConsoleVisual.titulo("MEUS EQUIPAMENTOS",
 				"ASSISTÊNCIA TÉCNICA | Cliente");
@@ -94,7 +94,7 @@ public class MenuCliente {
 		}
 	}
 
-	public void consultarOS() {
+	public void ConsultarOS() {
 
 		ConsoleVisual.titulo("MINHAS ORDENS DE SERVIÇO",
 				"ASSISTÊNCIA TÉCNICA | Cliente");
@@ -117,7 +117,7 @@ public class MenuCliente {
 		}
 	}
 
-	public void abrirOS() {
+	public void AbrirOS() {
 
 		ConsoleVisual.titulo("ABRIR ORDEM DE SERVIÇO",
 				"ASSISTÊNCIA TÉCNICA | Cliente");
@@ -225,7 +225,7 @@ public class MenuCliente {
 		}
 	}
 
-	public void deletar() {
+	public void Delete() {
 
 		ConsoleVisual.titulo("EXCLUIR MEU CADASTRO",
 				"ASSISTÊNCIA TÉCNICA | Cliente");

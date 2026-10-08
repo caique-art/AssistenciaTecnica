@@ -14,18 +14,18 @@ public class CadastroClientes {
 		this.sc = sc;
 	}
 
-	public void cadastrarClientes() {
+	public void CadastrarClientes() {
 
 		ConsoleVisual.titulo("CADASTRAR CLIENTE", "ASSISTÊNCIA TÉCNICA | Atendimento");
 		ConsoleVisual.pedir("Nome completo");
 		String nome = sc.nextLine();
 		ConsoleVisual.pedir("CPF");
 		String cpf = sc.nextLine();
-		if (!cpfExistent(cpf)) {
+		if (cpfExistent(cpf) == false) {
 			ConsoleVisual.pedir("Telefone");
 			String telefone = sc.nextLine();
 			ConsoleVisual.pedir("E-mail");
-			String email = sc.nextLine();
+			String email=sc.nextLine();
 
 			Clientes cliente = new Clientes(nome, cpf, telefone, email);
 			listaClientes.add(cliente);
@@ -41,6 +41,7 @@ public class CadastroClientes {
 			if (cpf.equals(x.getCpf())) {
 				return true;
 			}
+
 		}
 		return false;
 	}

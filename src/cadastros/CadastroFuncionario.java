@@ -14,17 +14,17 @@ public class CadastroFuncionario {
 		this.sc = sc;
 	}
 
-	public void cadastrarFuncionario() {
+	public void CadastrarFuncionario() {
 
 		ConsoleVisual.titulo("CADASTRAR FUNCIONÁRIO", "ASSISTÊNCIA TÉCNICA | Atendimento");
 		ConsoleVisual.pedir("Senha de acesso");
 		String senha = sc.nextLine();
-		if (senha(senha)) {
+		if (Senha(senha) == true) {
 			ConsoleVisual.pedir("Nome completo");
 			String nome = sc.nextLine();
 			ConsoleVisual.pedir("CPF");
 			String cpf = sc.nextLine();
-			if (!cpfExistent(cpf)) {
+			if (cpfExistent(cpf) == false) {
 				ConsoleVisual.pedir("Telefone");
 				String telefone = sc.nextLine();
 				ConsoleVisual.pedir("E-mail");
@@ -51,15 +51,17 @@ public class CadastroFuncionario {
 			if (cpf.equals(x.getCpf())) {
 				return true;
 			}
+
 		}
 		return false;
 	}
 
-	private boolean senha(String senha) {
+	private boolean Senha(String senha) {
 		for (Funcionario x : listaFuncionario) {
 			if (senha.equals(x.getSenha())) {
 				return true;
 			}
+
 		}
 		return false;
 	}

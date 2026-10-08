@@ -7,18 +7,12 @@ public class OrdemServico extends Produto {
 	private String servico;
 	private String defeito;
 	private Status status;
-	private Clientes cliente;
-	private int senha;
+	private Clientes Cliente;
 
 	public OrdemServico(String produto, String marca, String modelo, Clientes cliente) {
 	    super(produto, marca, modelo);
-	    this.cliente = cliente;
+	    this.Cliente = cliente;
 	    status = Status.NAO_ABERTA;
-	}
-	
-	public OrdemServico() {
-		super("", "", "");
-		status = Status.NAO_ABERTA;
 	}
 
 	public String getDefeito() {
@@ -27,11 +21,6 @@ public class OrdemServico extends Produto {
 
 	public void setDefeito(String defeito) {
 		this.defeito = defeito;
-	}
-	
-	public void setStatus(String statusStr) {
-		// Apenas para compatibilidade com o Menu antigo que usava string
-		this.status = Status.ABERTA; 
 	}
 
 	public Status getStatus() {
@@ -50,18 +39,10 @@ public class OrdemServico extends Produto {
 	}
 
 	public Clientes getCliente() {
-		return cliente;
+		return Cliente;
 	}
 
 	public void setCliente(Clientes cliente) {
-		this.cliente = cliente;
-	}
-	
-	public int getSenha() {
-		return senha;
-	}
-	
-	public void setSenha(int senha) {
-		this.senha = senha;
+		Cliente = cliente;
 	}
 }
